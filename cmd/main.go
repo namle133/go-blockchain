@@ -68,4 +68,22 @@ func main() {
 		fmt.Println()
 
 	}
+	//Testing the Validate
+	chain.Blocks[1].Data = []byte("Nam")
+	pow := blockchain.NewProof(chain.Blocks[1])
+	_, k := pow.Run()
+	chain.Blocks[1].Hash = k
+	for _, block := range chain.Blocks {
+
+		fmt.Printf("Previous Hash: %x\n", block.PrevHash)
+		fmt.Printf("Data in Block: %s\n", block.Data)
+		fmt.Printf("Hash: %x\n", block.Hash)
+		fmt.Printf("Nonce: %d\n", block.Nonce)
+
+		pow := blockchain.NewProof(block)
+		fmt.Printf("PoW: %s\n", strconv.FormatBool(pow.Validate()))
+		fmt.Println()
+
+	}
+
 }
