@@ -13,9 +13,11 @@ package blockchain
 // }
 
 // func (b *Block) DeriveHash() {
-// 	info := bytes.Join([][]byte{b.Data, b.PrevHash, []byte(b.Nonce)}, []byte{})
+// 	times := time.Now().String()
+// 	info := bytes.Join([][]byte{[]byte(times), b.Data, b.PreHash}, []byte{})
 // 	hash := sha256.Sum256(info)
 // 	b.Hash = hash[:]
+// 	b.TimeStamp = []byte(times)
 // }
 
 // // func (b *Block) GiveHash(h []byte) {
