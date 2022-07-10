@@ -1,5 +1,10 @@
 package blockchain
 
+import (
+	"fmt"
+	"time"
+)
+
 // type Block struct {
 // 	Hash      []byte
 // 	TimeStamp []byte
@@ -109,8 +114,10 @@ type Block struct {
 func CreateBlock(data string, prevHash []byte) *Block {
 	block := &Block{[]byte{}, []byte(data), prevHash, 0}
 	pow := NewProof(block)
+	start := time.Now()
 	nonce, hash := pow.Run()
-
+	elapsed := time.Since(start) // This will check how long has passed since time.Now() was executed
+	fmt.Printf("time Mining: %v\n", elapsed)
 	block.Hash = hash[:]
 	block.Nonce = nonce
 
